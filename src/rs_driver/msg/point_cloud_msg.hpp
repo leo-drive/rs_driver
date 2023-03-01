@@ -53,6 +53,19 @@ struct PointXYZIRT
   double timestamp;
 };
 
+struct PointXYZIRADT
+{
+  float x;
+  float y;
+  float z;
+  float intensity;
+  uint16_t ring;
+  float azimuth;
+  float distance;
+  uint8_t return_type;
+  double timestamp;
+};
+
 template <typename T_Point>
 class PointCloudT
 {
@@ -69,4 +82,3 @@ public:
 
   VectorT points;
 };
-
