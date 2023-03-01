@@ -275,6 +275,9 @@ inline bool DecoderRSBP<T_PointCloud>::internDecodeMsopPkt(const uint8_t* packet
         setIntensity(point, channel.intensity);
         setTimestamp(point, chan_ts);
         setRing(point, this->chan_angles_.toUserChan(chan));
+        setAzimuth(point, angle_horiz);
+        setDistance(point, distance);
+        setReturnType(point, this->echo_mode_);
 
         this->point_cloud_->points.emplace_back(point);
       }
@@ -287,6 +290,9 @@ inline bool DecoderRSBP<T_PointCloud>::internDecodeMsopPkt(const uint8_t* packet
         setIntensity(point, 0);
         setTimestamp(point, chan_ts);
         setRing(point, this->chan_angles_.toUserChan(chan));
+        setAzimuth(point, angle_horiz);
+        setDistance(point, 0);
+        setReturnType(point, this->echo_mode_);
 
         this->point_cloud_->points.emplace_back(point);
       }
