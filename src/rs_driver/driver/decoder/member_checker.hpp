@@ -50,6 +50,9 @@ DEFINE_MEMBER_CHECKER(z)
 DEFINE_MEMBER_CHECKER(intensity)
 DEFINE_MEMBER_CHECKER(ring)
 DEFINE_MEMBER_CHECKER(timestamp)
+DEFINE_MEMBER_CHECKER(azimuth)
+DEFINE_MEMBER_CHECKER(distance)
+DEFINE_MEMBER_CHECKER(return_type)
 
 #define RS_HAS_MEMBER(C, member) has_##member<C>::value
 
@@ -121,5 +124,44 @@ inline typename std::enable_if<RS_HAS_MEMBER(T_Point, timestamp)>::type setTimes
                                                                                      const double& value)
 {
   point.timestamp = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, azimuth)>::type setAzimuth(T_Point& point,
+                                                                                      const float& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, azimuth)>::type setAzimuth(T_Point& point,
+                                                                                     const float& value)
+{
+  point.azimuth = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, distance)>::type setDistance(T_Point& point,
+                                                                                  const float& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, distance)>::type setDistance(T_Point& point,
+                                                                                 const float& value)
+{
+  point.distance = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, return_type)>::type setReturnType(T_Point& point,
+                                                                                    const uint8_t& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, return_type)>::type setReturnType(T_Point& point,
+                                                                                   const uint8_t& value)
+{
+  point.return_type = value;
 }
 
